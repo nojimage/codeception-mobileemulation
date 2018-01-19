@@ -7,6 +7,6 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - \Codeception\Module\MobileEmulation\Chrome
+        - MobileEmulation
         - WebDriver
         - \Helper\Acceptance

@@ -17,7 +17,7 @@ use InvalidArgumentException;
 /**
  * WebDriver Mobile Emulation for Chrome
  */
-class Chrome extends Module
+class Chrome extends Module implements MobileEmulationDriverInterface
 {
 
     /**

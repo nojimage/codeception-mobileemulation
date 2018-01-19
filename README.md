@@ -30,7 +30,7 @@ Then enable this module in your test suite configration file (eg: `acceptance.su
 ```
 modules:
     enabled:
-        - MobileEmulation\Chrome
+        - MobileEmulation
         - WebDriver
 ```
 
