@@ -11,12 +11,9 @@ sudo: false
 env:
   global:
     - DEFAULT=1
-    - DISPLAY=':99.0'
 
-addons:
-  apt:
-    packages:
-      - google-chrome-stable
+services:
+  - docker
 
 cache:
   directories:
@@ -30,17 +27,19 @@ matrix:
   - php: 7.1
     env: PHPCS=1 DEFAULT=0
 
+before_install:
+  - if [ $DEFAULT = '1' ]; then sh ./ci/launch_selenium.sh; fi
+
 install:
   - composer self-update
   - composer install --prefer-dist --no-interaction
 
 before_script:
-  - if [ $DEFAULT = '1' ]; then sh -e /etc/init.d/xvfb start; fi
   - if [ $DEFAULT = '1' ]; then vendor/bin/codecept build; fi
   - if [ $PHPCS = '1' ]; then composer require squizlabs/php_codesniffer; fi
 
 script:
-  - if [ $DEFAULT = '1' ]; then vendor/bin/codecept run unit; fi
+  - if [ $DEFAULT = '1' ]; then vendor/bin/codecept run; fi
   - if [ $PHPCS = '1' ]; then vendor/bin/phpcs -p --extensions=php --standard=PSR2 ./src; fi
 
 notifications:
