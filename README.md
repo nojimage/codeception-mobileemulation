@@ -12,7 +12,7 @@
     </a>
 </p>
 
-This Codeception module can be able mobile emulation on browser.
+This Codeception module can be able mobile emulation on browser. Currently support only `chrome` browser.
 
 ## Installation
 
@@ -36,7 +36,7 @@ modules:
 
 See: [06-ModulesAndHelpers - Codeception - Documentation](http://codeception.com/docs/06-ModulesAndHelpers)
 
-[IMPORTANT] Should be `MobileEmulation\Chrome` module load before `WebDriver` module.
+[IMPORTANT] `MobileEmulation` module should be load before `WebDriver` module.
 
 ## Usage
 
