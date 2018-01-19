@@ -1,0 +1,20 @@
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+
+actor_suffix: Tester
+
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+
+modules:
+    config:
+        WebDriver:
+            url: 'https://google.com'
+            host: 'localhost'
+            port: 4444
+            browser: chrome
