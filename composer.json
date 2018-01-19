@@ -18,5 +18,10 @@
         "psr-4": {
             "Codeception\\Module\\MobileEmulation\\Test\\": "tests/_support"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/codecept run --steps",
+        "cs": "phpcs --standard=PSR2 -p src/",
+        "cs-fix": "phpcbf --standard=PSR2 -p src/"
     }
 }
