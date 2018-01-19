@@ -34,7 +34,8 @@ class MobileEmulation extends Module
     /**
      * setup defaultDeviceName
      */
-    public function _initialize()
+    // @codingStandardsIgnoreStart
+    public function _initialize()// @codingStandardsIgnoreEnd
     {
         $defaultDeviceName = $this->_getConfig('defaultDeviceName');
         if ($defaultDeviceName) {
@@ -53,7 +54,8 @@ class MobileEmulation extends Module
      *
      * @param TestInterface $test
      */
-    public function _before(TestInterface $test)
+    // @codingStandardsIgnoreStart
+    public function _before(TestInterface $test)// @codingStandardsIgnoreEnd
     {
         if (!is_a($test, Cest::class)) {
             return;
@@ -69,7 +71,8 @@ class MobileEmulation extends Module
      *
      * @param TestInterface $test
      */
-    public function _after(TestInterface $test)
+    // @codingStandardsIgnoreStart
+    public function _after(TestInterface $test)// @codingStandardsIgnoreEnd
     {
         if ($this->getBrowser() === 'chrome') {
             $this->chrome->_after($test);

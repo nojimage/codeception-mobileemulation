@@ -20,14 +20,16 @@ interface MobileEmulationDriverInterface
      *
      * @param TestInterface $test
      */
-    public function _before(TestInterface $test);
+    // @codingStandardsIgnoreStart
+    public function _before(TestInterface $test);// @codingStandardsIgnoreEnd
 
     /**
      * Reset WebDriver config when mobile emulated
      *
      * @param TestInterface $test
      */
-    public function _after(TestInterface $test);
+    // @codingStandardsIgnoreStart
+    public function _after(TestInterface $test);// @codingStandardsIgnoreEnd
 
     /**
      * set mobileEmulation and restart WebDriver

@@ -37,7 +37,8 @@ class Chrome extends Module implements MobileEmulationDriverInterface
     /**
      * setup defaultDeviceName
      */
-    public function _initialize()
+    // @codingStandardsIgnoreStart
+    public function _initialize()// @codingStandardsIgnoreEnd
     {
         $defaultDeviceName = $this->_getConfig('defaultDeviceName');
         if ($defaultDeviceName) {
@@ -50,7 +51,8 @@ class Chrome extends Module implements MobileEmulationDriverInterface
      *
      * @param TestInterface $test
      */
-    public function _before(TestInterface $test)
+    // @codingStandardsIgnoreStart
+    public function _before(TestInterface $test)// @codingStandardsIgnoreEnd
     {
         if (!is_a($test, Cest::class)) {
             return;
@@ -72,7 +74,8 @@ class Chrome extends Module implements MobileEmulationDriverInterface
      *
      * @param TestInterface $test
      */
-    public function _after(TestInterface $test)
+    // @codingStandardsIgnoreStart
+    public function _after(TestInterface $test)// @codingStandardsIgnoreEnd
     {
         if ($this->mobileEmulated) {
             $driver = $this->getModule('WebDriver');
@@ -104,7 +107,8 @@ class Chrome extends Module implements MobileEmulationDriverInterface
      * @param mixed $deviceName
      * @link https://sites.google.com/a/chromium.org/chromedriver/mobile-emulation
      */
-    protected function _mobileEmulation($deviceName)
+    // @codingStandardsIgnoreStart
+    protected function _mobileEmulation($deviceName)// @codingStandardsIgnoreEnd
     {
         $mobileEmulation;
 
@@ -123,7 +127,7 @@ class Chrome extends Module implements MobileEmulationDriverInterface
         $driver = $this->getModule('WebDriver');
         /* @var $driver WebDriver */
 
-        $driver->_capabilities(function($currentCapabilities) use ($mobileEmulation) {
+        $driver->_capabilities(function ($currentCapabilities) use ($mobileEmulation) {
             $chromeOptions = new ChromeOptions();
             $chromeOptions->setExperimentalOption('mobileEmulation', $mobileEmulation->toArray());
             $currentCapabilities[ChromeOptions::CAPABILITY] = $chromeOptions->toArray();
