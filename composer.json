@@ -1,0 +1,22 @@
+{
+    "name": "elstc/codeception-mobileemulation",
+    "description": "WebDriver mobile emulation switcher for Codeception",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.6"
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codeception\\Module\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Codeception\\Module\\MobileEmulation\\Test\\": "tests/_support"
+        }
+    }
+}
