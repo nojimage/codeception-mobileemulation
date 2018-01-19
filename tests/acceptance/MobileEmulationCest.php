@@ -40,11 +40,32 @@ class MobileEmulationCest
     /**
      * @param AcceptanceTester $I
      */
+    public function tryEmulateWithCustomOptions(AcceptanceTester $I)
+    {
+        $I->expect('set Custom settings');
+        $I->emulationMobile([
+            'userAgent' => 'Mozilla/5.0 (iPad; CPU OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.0 Mobile/14G60 Safari/602.1',
+            'deviceMetrics' => [
+                'width' => 768,
+                'height' => 1024,
+                'pixelRatio' => 2
+            ],
+        ]);
+        $I->amOnPage('/');
+        $I->seeInUserAgent('iPad');
+        $I->expectsWindowSizeIs(768, 1024);
+        $I->expectsDevicePixcelRatioIs(2);
+    }
+
+    /**
+     * @param AcceptanceTester $I
+     */
     public function tryRevertEmulation(AcceptanceTester $I)
     {
         $I->expect('revert emulation settings in another senario');
         $I->amOnPage('/');
         $I->dontSeeInUserAgent('iPhone OS');
         $I->dontSeeInUserAgent('Android');
+        $I->dontSeeInUserAgent('iPad');
     }
 }

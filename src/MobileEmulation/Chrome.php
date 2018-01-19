@@ -12,6 +12,7 @@ use Codeception\Module\WebDriver;
 use Codeception\Test\Cest;
 use Codeception\TestInterface;
 use Facebook\WebDriver\Chrome\ChromeOptions;
+use InvalidArgumentException;
 
 /**
  * WebDriver Mobile Emulation for Chrome
@@ -85,7 +86,7 @@ class Chrome extends Module
     /**
      * set mobileEmulation and restart WebDriver
      *
-     * @param string $deviceName
+     * @param mixed $deviceName
      * @link https://sites.google.com/a/chromium.org/chromedriver/mobile-emulation
      */
     public function emulationMobile($deviceName = null)
@@ -100,21 +101,31 @@ class Chrome extends Module
     }
 
     /**
-     * @param string $deviceName
+     * @param mixed $deviceName
      * @link https://sites.google.com/a/chromium.org/chromedriver/mobile-emulation
      */
     protected function _mobileEmulation($deviceName)
     {
-        $mobileEmulation = [
-            'deviceName' => $deviceName,
-        ];
+        $mobileEmulation;
+
+        if (is_string($deviceName)) {
+            $mobileEmulation = MobileEmulationOptions::withDeviceName($deviceName);
+        } elseif (is_array($deviceName)) {
+            $mobileEmulation = MobileEmulationOptions::fromArray($deviceName);
+        } else {
+            $mobileEmulation = $deviceName;
+        }
+
+        if (!is_a($mobileEmulation, MobileEmulationOptions::class)) {
+            throw new InvalidArgumentException('Invalid mobileEmulation options: ' . var_export($deviceName, true));
+        }
 
         $driver = $this->getModule('WebDriver');
         /* @var $driver WebDriver */
 
         $driver->_capabilities(function($currentCapabilities) use ($mobileEmulation) {
             $chromeOptions = new ChromeOptions();
-            $chromeOptions->setExperimentalOption('mobileEmulation', $mobileEmulation);
+            $chromeOptions->setExperimentalOption('mobileEmulation', $mobileEmulation->toArray());
             $currentCapabilities[ChromeOptions::CAPABILITY] = $chromeOptions->toArray();
 
             return $currentCapabilities;
